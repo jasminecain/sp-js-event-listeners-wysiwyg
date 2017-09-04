@@ -49,9 +49,10 @@ let famousGuo = [
       death: 201
     }
   }
-  ];
+];
 
-var output = document.getElementById("outputBox");
+let inputField = document.getElementById('inputText');
+let output = document.getElementById('outputBox');
 
 for (counter = 0; counter < famousGuo.length; counter++) {
   // Give each person element a unique identifier
@@ -63,30 +64,44 @@ for (counter = 0; counter < famousGuo.length; counter++) {
   </div>`
 }
 
-// Now cardGuo will have elements in it
-var cards = document.getElementsByClassName('person-container');
+// Now card will have elements in it
+let cards = document.getElementsByClassName('person-container');
+let selectedCard;
 
 // Event listeners are created
-for (var i = 0; i < cards.length; i++) {
+for (let i = 0; i < cards.length; i++) {
   cards[i].addEventListener('click', function(event) {
     toggleClassOff(cards);
     // Logic to execute when the element is clicked
     this.classList.toggle('elementToggle');
     // console.log('what is this?', this.classList.toggle);
-      document.getElementById('inputText').focus();
-        inputField.value = ""
-      // ();
+    document.getElementById('inputText').focus();
+    inputField.value = '';
+    // debugger;
+    editBio(this);
   });
 };
 
 //Edit each cards bio when input
-function editBio(cards) {
-  for (var i = 0; i < cards.length; i++) {
-    inputField.addEventListener("keyup"), function(event) {
-      debugger;
-      output(cards[i]).innerHTML = event.target.value;
-    }
-  };
+function editBio(selectedCard) {
+  let bio = selectedCard.children[1].getElementsByClassName('bio')[0];
+
+  inputField.addEventListener('keyup', function(event) {
+    // debugger;
+    bio.innerHTML = event.target.value;
+    bio.innerHTML = editedBio;
+      if (event.keyCode === 13) {
+        bio.innerHTML = editedBio;
+        inputField.value = '';
+      }
+  });
+
+  // for (var i = 0; i < cards.length; i++) {
+  //   inputField.addEventListener("keyup"), function(event) {
+  //     debugger;
+  //     output(cards[i]).innerHTML = event.target.value;
+  //   }
+  // };
 };
 
 //Remove previous toggle when another card is clicked
@@ -100,11 +115,12 @@ function toggleClassOff(cards) {
 
 
 //Clear input box when enter is pressed
-let inputField = document.getElementById("inputText");
+// let inputField = document.getElementById("inputText");
 
-inputField.addEventListener("keyup", clearField);
-function clearField() {
-  if (event.keyCode === 13) {
-    inputField.value = "";
-  };
-};
+// inputField.addEventListener("keyup", clearField);
+
+// function clearField() {
+//   if (event.keyCode === 13) {
+//     inputField.value = "";
+//   };
+// };
