@@ -1,0 +1,45 @@
+h1, h2 {
+  text-align: center;
+}
+
+.input-field {
+
+}
+
+.output-box {
+  display: block;
+  width: 100%;
+}
+
+.person-container {
+  float: left;
+  height: 400px;
+  padding: 20px;
+  text-align: center;
+  width: 275px;
+}
+
+.person-container:not(:last-child) {
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.person-container:nth-child(odd) {
+  background: #B3E5FC;
+}
+
+.person-container:nth-child(even) {
+  background: #FFF9C4;
+}
+
+.image {
+  height: 35%;
+  width: 35%;
+}
+
+.elementToggle {
+  border: 5px dotted aqua;
+  height: 390px;
+  padding: 15px;
+  width: 265px;
+}
