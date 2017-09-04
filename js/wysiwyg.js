@@ -59,14 +59,13 @@ for (counter = 0; counter < famousGuo.length; counter++) {
   //Creating card elemenet
   output.innerHTML += `<div class="person-container" id="person--${counter}">
     <h2>${famousGuo[counter].title}: ${famousGuo[counter].name}</h2>
-    <section><p class="bio">${famousGuo[counter].bio}<p><img class="image" src="${famousGuo[counter].image}"</img></section>
+    <section><p class="bio" id="bio--${counter}">${famousGuo[counter].bio}<p><img class="image" src="${famousGuo[counter].image}"</img></section>
     <footer>Life Span: ${famousGuo[counter].lifespan.birth} - ${famousGuo[counter].lifespan.death}</footer>
   </div>`
 }
 
 // Now card will have elements in it
 let cards = document.getElementsByClassName('person-container');
-let selectedCard;
 
 // Event listeners are created
 for (let i = 0; i < cards.length; i++) {
@@ -74,34 +73,19 @@ for (let i = 0; i < cards.length; i++) {
     toggleClassOff(cards);
     // Logic to execute when the element is clicked
     this.classList.toggle('elementToggle');
-    // console.log('what is this?', this.classList.toggle);
+    editBio(i);
     document.getElementById('inputText').focus();
     inputField.value = '';
-    // debugger;
-    editBio(this);
   });
 };
 
 //Edit each cards bio when input
-function editBio(selectedCard) {
-  let bio = selectedCard.children[1].getElementsByClassName('bio')[0];
+function editBio(i) {
+  bio = document.getElementById(`bio--${i}`);
 
   inputField.addEventListener('keyup', function(event) {
-    // debugger;
     bio.innerHTML = event.target.value;
-    bio.innerHTML = editedBio;
-      if (event.keyCode === 13) {
-        bio.innerHTML = editedBio;
-        inputField.value = '';
-      }
   });
-
-  // for (var i = 0; i < cards.length; i++) {
-  //   inputField.addEventListener("keyup"), function(event) {
-  //     debugger;
-  //     output(cards[i]).innerHTML = event.target.value;
-  //   }
-  // };
 };
 
 //Remove previous toggle when another card is clicked
@@ -113,14 +97,13 @@ function toggleClassOff(cards) {
   };
 };
 
-
 //Clear input box when enter is pressed
-// let inputField = document.getElementById("inputText");
+function clearField() {
+  document.addEventListener('keyup', function(event) {
+    if (event.keyCode === 13) {
+      inputField.value = "";
+    }
+  });
+};
 
-// inputField.addEventListener("keyup", clearField);
-
-// function clearField() {
-//   if (event.keyCode === 13) {
-//     inputField.value = "";
-//   };
-// };
+clearField();
